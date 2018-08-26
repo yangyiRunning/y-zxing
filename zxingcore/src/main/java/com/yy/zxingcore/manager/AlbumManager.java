@@ -12,14 +12,16 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.google.zxing.BinaryBitmap;
+import com.google.zxing.ChecksumException;
 import com.google.zxing.DecodeHintType;
+import com.google.zxing.FormatException;
+import com.google.zxing.NotFoundException;
 import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.QRCodeReader;
-import com.yy.zxingcore.activity.CaptureActivity;
 import com.yy.zxingcore.util.PermissionUtil;
-import com.yy.zxingcore.util.RequestConstant;
+import com.yy.zxingcore.constant.RequestConstant;
 
 import java.util.Hashtable;
 
@@ -30,6 +32,7 @@ import java.util.Hashtable;
  */
 public class AlbumManager {
 
+    private static final String CHARACTER_SET = "utf-8";
     private static AlbumManager albumManager;
     private String[] permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
@@ -94,13 +97,13 @@ public class AlbumManager {
         fragment.startActivityForResult(wrapperIntent, RequestConstant.REQUEST_CODE_ALBUM);
     }
 
-    public Result scanningImage(Context context, Uri path) {
+    private Result scanningImage(Context context, Uri path) {
         if (path == null || path.equals("")) {
             return null;
         }
         // DecodeHintType 和EncodeHintType
         Hashtable<DecodeHintType, String> hints = new Hashtable<>();
-        hints.put(DecodeHintType.CHARACTER_SET, "utf-8");
+        hints.put(DecodeHintType.CHARACTER_SET, CHARACTER_SET);
         try {
             Bitmap scanBitmap = BitmapFactory.decodeStream(
                     context.getContentResolver().openInputStream(path));
@@ -114,6 +117,31 @@ public class AlbumManager {
             return reader.decode(bitmap1, hints);
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Result scanningImage(Context context, Bitmap bitmap) {
+        if (bitmap == null) {
+            return null;
+        }
+        Hashtable<DecodeHintType, String> hints = new Hashtable<>();
+        hints.put(DecodeHintType.CHARACTER_SET, CHARACTER_SET);
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int[] pixels = new int[width * height];
+        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+        RGBLuminanceSource source = new RGBLuminanceSource(width, height, pixels);
+        BinaryBitmap bitmap1 = new BinaryBitmap(new HybridBinarizer(source));
+        QRCodeReader reader = new QRCodeReader();
+        try {
+            return reader.decode(bitmap1, hints);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+        } catch (ChecksumException e) {
+            e.printStackTrace();
+        } catch (FormatException e) {
             e.printStackTrace();
         }
         return null;
@@ -144,5 +172,25 @@ public class AlbumManager {
                 }
             });
         }
+    }
+
+    public void showScanningBitmapResult(final Context context, final Bitmap bitmap) {
+        ThreadPoolManager.getInstance().submitToPool(new Runnable() {
+            @Override
+            public void run() {
+                Result result = AlbumManager.getInstance().scanningImage(
+                        context, bitmap);
+                if (result == null) {
+                    Looper.prepare();
+                    Toast.makeText(context, "图片信息有误", Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                } else {
+                    String recode = result.getText();
+                    Looper.prepare();
+                    Toast.makeText(context, "图片内容为:" + recode, Toast.LENGTH_SHORT).show();
+                    Looper.loop();
+                }
+            }
+        });
     }
 }

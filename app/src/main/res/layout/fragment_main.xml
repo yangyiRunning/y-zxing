@@ -13,9 +13,61 @@
 
     <Button
         android:id="@+id/gotoPicture"
-        android:layout_marginTop="10dp"
         android:layout_width="120dp"
         android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:text="从相册选取" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/qrcodeEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="输入二维码想包含的内容:"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/createQRCode"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_margin="5dp"
+            android:layout_marginTop="10dp"
+            android:text="生成二维码" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/qrcodeResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/qrcodeImg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="长按二维码识别" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:text="复位" />
 
 </LinearLayout>

@@ -1,4 +1,4 @@
-package com.yy.zxingcore.util;
+package com.yy.zxingcore.constant;
 
 
 /**

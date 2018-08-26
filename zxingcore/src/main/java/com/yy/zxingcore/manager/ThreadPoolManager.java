@@ -1,6 +1,7 @@
 package com.yy.zxingcore.manager;
 
 import android.support.annotation.NonNull;
+import android.support.v4.util.LruCache;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

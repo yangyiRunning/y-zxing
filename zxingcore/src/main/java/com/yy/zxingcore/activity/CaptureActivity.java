@@ -64,7 +64,7 @@ import com.yy.zxingcore.manager.BeepManager;
 import com.yy.zxingcore.manager.LightManager;
 import com.yy.zxingcore.util.LogUtil;
 import com.yy.zxingcore.util.PermissionUtil;
-import com.yy.zxingcore.util.RequestConstant;
+import com.yy.zxingcore.constant.RequestConstant;
 import com.yy.zxingcore.view.QRCodeTopBar;
 import com.yy.zxingcore.view.ViewfinderView;
 

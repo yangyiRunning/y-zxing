@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import android.widget.Toast;
 
 import com.yy.zxingcore.activity.CaptureActivity;
-import com.yy.zxingcore.util.RequestConstant;
+import com.yy.zxingcore.constant.RequestConstant;
 
 /**
  * @author yangyi 2018年08月05日03:16:57

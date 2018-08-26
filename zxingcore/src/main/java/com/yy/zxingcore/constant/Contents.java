@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yy.zxingcore.util;
+package com.yy.zxingcore.constant;
 
 import android.provider.ContactsContract;
 

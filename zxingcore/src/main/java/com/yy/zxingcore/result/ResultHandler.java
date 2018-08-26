@@ -32,7 +32,7 @@ import com.google.zxing.client.result.ParsedResultType;
 import com.google.zxing.client.result.ResultParser;
 import com.yy.zxingcore.R;
 import com.yy.zxingcore.activity.PreferencesActivity;
-import com.yy.zxingcore.util.Contents;
+import com.yy.zxingcore.constant.Contents;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
