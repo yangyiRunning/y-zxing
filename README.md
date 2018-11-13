@@ -9,12 +9,13 @@
 - **读取相册中的二维码/条形码图片读取其中信息**
 - **打开和关闭手电筒**
 - **仿微信绿色系UI**
+- **生成任意文本内容的二维码**
 
 #### 2. 实际运行效果图
 
-|![1](https://s1.ax1x.com/2018/08/06/PDx4UA.png) | ![2](https://s1.ax1x.com/2018/08/06/PDx7gf.png) | ![3](https://s1.ax1x.com/2018/08/06/PDxHv8.png) |![4](https://s1.ax1x.com/2018/08/06/PDxqKS.png)|
+| ![1](https://s1.ax1x.com/2018/11/13/iX3qrq.png) | ![2](https://s1.ax1x.com/2018/11/13/iX3B5D.png) | ![3](https://s1.ax1x.com/2018/11/13/iX3y2d.png) |![4](https://s1.ax1x.com/2018/11/13/iX3gKI.png)|
 | :---: | :---: | :---: |:---:|
-| ![5](https://s1.ax1x.com/2018/08/06/PDxLDg.png) | ![6](https://s1.ax1x.com/2018/08/06/PDxjEj.png) | ![7](https://s1.ax1x.com/2018/08/06/PDxx5n.png) ||
+| ![5](https://s1.ax1x.com/2018/11/13/iX3ha8.png) | ![6](https://s1.ax1x.com/2018/11/13/iX3IPg.png) | ![7](https://s1.ax1x.com/2018/11/13/iX3oGQ.png) ||
 
 #### 3. 代码调用
 
@@ -46,6 +47,16 @@ AlbumManager.getInstance().onActivityResult(getContext(),
                 requestCode,
                 data);
 `
+
+- 生成所定义内容的二维码
+
+`
+Bitmap createdBitmap = QRCodeUtil.createQRCodeBitmap(qrcodeContent, 300, 300);
+`
+
+#### 4. APK安装包
+
+- [APK安装包](app-debug.apk)
 
 ---
 
